@@ -2,7 +2,10 @@ function drawVisualization(user, views, row, problem) {
 
   var padding = 10;
   var margin = {top: 10, right: 10, bottom: 10, left: 10};
-  var w = 4, h=20;
+  var width=3000, height=50;
+  var w = 2, h=50;
+  var view_gap = 2;
+
   //var width = w - margin.left - margin.right;
   //var height = h - margin.top - margin.bottom;
 
@@ -16,38 +19,12 @@ function drawVisualization(user, views, row, problem) {
     .append("svg")
     .attr("id", user+'_svg_'+problem)
     .attr("class", "svgContainer")
-    .attr("width",10000)
-    .attr("height",50);
+    .attr("width",width)
+    .attr("height",height);
 
   var x_position = 0;
 
   views.map(function (view, index){
-
-    /* Vertical
-    var rects = svgContainer
-      .append("g")
-      .selectAll("rect")
-      .data(view)
-      .enter()
-      .append("rect")
-      .attr("id",user+'_'+index.toString())
-      .attr("x", function(d,i){return (i*(w+1)+1)})
-      .attr("y", (h+3)*index)
-      .attr("fill", function(d,i){return colorMap(d);})
-      .attr("width", w)
-      .attr("height", h);
-
-    var borderPath = svgContainer.append("rect")
-      .attr("x", 1)
-      .attr("y", (h+3)*index)
-      .attr("height",h)
-      .attr("width", (w+1) * view.length-1)
-      .style("stroke", 'black')
-      .style("fill", "none")
-      .style("stroke-width", 1);
-
-    x_position += view.length;
-    */
 
     /* Horizontal */
     var rects = svgContainer
@@ -57,22 +34,22 @@ function drawVisualization(user, views, row, problem) {
       .enter()
       .append("rect")
       .attr("id",user+'_'+index.toString())
-      .attr("x", function(d,i){return x_position+ 3 + i*(w+1)})
+      .attr("x", function(d,i){return x_position+ i*(w)})
       .attr("y", 0)
       .attr("fill", function(d,i){return colorMap(d);})
       .attr("width", w)
       .attr("height", h);
 
     var borderPath = svgContainer.append("rect")
-      .attr("x", x_position+3)
+      .attr("x", x_position)
       .attr("y", 0)
       .attr("height",h)
-      .attr("width", (w+1) * view.length-1)
+      .attr("width", (w) * view.length)
       .style("stroke", 'black')
       .style("fill", "none")
       .style("stroke-width", 1);
 
-    x_position += (w+1) * view.length + 3
+    x_position += (w) * view.length + view_gap
   })
 
 }
