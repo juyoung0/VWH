@@ -1,21 +1,28 @@
-function drawVisualization(user, views, row, problem, new_width) {
+namedict = {'S48':'CG-11','S20':'EG-20','S21':'EG-21','S23':'EG-23','S25':'EG-25','S16':'EG-16','S51':'CG24','S47':'CG-10','S22':'EG-22'}
+
+function drawVisualization(user, views, row, problem, new_width, new_height, new_length) {
 
   var padding = 10;
   var margin = {top: 10, right: 10, bottom: 10, left: 10};
-  var width=1000, height=50;
+  var width=1000, height=100;
   var w = 4, h=50;
   var view_gap = 3;
   var gap_w = 0;
 
   if(new_width!=0)
     w = new_width;
+  if(new_height!=0)
+    h = new_height;
+  if(new_length!=0)
+    width = new_length;
   //var width = w - margin.left - margin.right;
   //var height = h - margin.top - margin.bottom;
 
   var workspace = $('<div></div>').attr('id', user+"_space_"+problem).attr('class','workspace');
   workspace.appendTo('body');
-  workspace.innerHTML += "User : " + user + ", Problem : " + problem;
-
+  //workspace.innerHTML += "User : " + user + ", Problem : " + problem;
+  var textInfo = "<p>User : " + namedict[user] + ", Problem : " + problem+"</p>";
+  workspace.append(textInfo);
   var svgContainer = d3.select("#"+user+"_space_"+problem)
     .attr("x", margin.left)
     .attr("y", (margin.top + workspace.height())*row)
@@ -73,21 +80,21 @@ function drawVisualization(user, views, row, problem, new_width) {
   })
 }
 
-function draw(width) {
+function draw(width, height, length) {
   console.log("width is "+width.toString())
   Object.keys(p3).map(function (key, index) {
     console.log(p3[key]);
-    drawVisualization(key, p3[key], index, 'p3', width);
+    drawVisualization(key, p3[key], index, 'p3', width, height, length);
   });
 
   Object.keys(p4).map(function (key, index) {
     console.log(p4[key]);
-    drawVisualization(key, p4[key], index, 'p4', width);
+    drawVisualization(key, p4[key], index, 'p4', width, height, length);
   });
 
   Object.keys(p5).map(function (key, index) {
     console.log(p5[key]);
-    drawVisualization(key, p5[key], index, 'p5', width);
+    drawVisualization(key, p5[key], index, 'p5', width, height, length);
   });
 }
 /*p3.map(function(user){
@@ -99,7 +106,10 @@ function changeWidth(){
   d3.select("svg").remove();
 
   var new_width = Number($('#new_width').val());
-  draw(new_width);
+  var new_height = Number($('#new_height').val());
+  var new_length = Number($('#new_length').val());
+
+  draw(new_width, new_height, new_length);
 }
 
-draw(0);
+draw(0, 0, 0 );
