@@ -1,4 +1,4 @@
-namedict = {'S48':'CG-11','S20':'EG-20','S21':'EG-21','S23':'EG-23','S25':'EG-25','S16':'EG-16','S51':'CG24','S22':'EG-22', 'S44':'CG-7'}
+namedict = {'S48':'CG-11','S20':'EG-20','S21':'EG-21','S23':'EG-23','S25':'EG-25','S16':'EG-16','S51':'CG24','S22':'EG-22', 'S44':'CG-7','S16_CUT':'EG-16-CUT'}
 
 function drawVisualization(user, views, row, problem, new_width, new_height, new_gap) {
 
